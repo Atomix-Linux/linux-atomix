@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  PKGDEST: "/tmp/linux-chimeraos"
+  PKGDEST: "/tmp/linux-atomix"
   BUILDDIR: "/tmp/build"
 
 jobs:
@@ -48,7 +48,7 @@ jobs:
       - name: Install dependencies
         run: |
           pacman -Syu --noconfirm bc cpio pahole python kmod
-      - name: Build linux-chimeraos package
+      - name: Build linux-atomix package
         id: build-kernel-package
         shell: bash
         run: |
@@ -59,7 +59,7 @@ jobs:
       - name: Upload package artifact
         uses: actions/upload-artifact@v4
         with:
-          name: linux-chimeraos-package
+          name: linux-atomix-package
           path: |
             ${{ env.PKGDEST }}/*.pkg.tar.zst
           if-no-files-found: error
@@ -71,13 +71,13 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: linux-chimeraos-package
+          name: linux-atomix-package
           path: ${{ env.PKGDEST }}
 
       - name: Make release
         uses: softprops/action-gh-release@v1
         with:
-          name: linux-chimeraos-${{needs.build-kernel.outputs.full_version}}
+          name: linux-atomix-${{needs.build-kernel.outputs.full_version}}
           token: ${{ secrets.GITHUB_TOKEN }}
           draft: false
           prerelease: true
