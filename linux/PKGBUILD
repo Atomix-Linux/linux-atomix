@@ -74,7 +74,7 @@ prepare() {
     src="${src##*/}"
     [[ $src = *.patch ]] || continue
     echo "Applying patch $src..."
-    patch -Np1 < "../$src"
+    patch -Np1 < "../$src" || echo "Patch already applied."
   done
 
   echo "Setting config..."
