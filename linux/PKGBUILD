@@ -58,7 +58,7 @@ _make() {
 }
 
 prepare() {
-  mv linux-${pkgver%.*}-${pkgver##*.} $_srcname
+  mv linux-atomix $_srcname
   cd $_srcname
 
   echo "Setting version..."
