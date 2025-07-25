@@ -1,10 +1,10 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 # Maintainer: Joaquín I. Aramendía (samsagax) <samsagaxg@gmail.com>
 
-pkgbase=linux-chimeraos
-pkgver=6.14.9.chos1
+pkgbase=linux-atomix
+pkgver=6.15.8.atom1
 pkgrel=1
-pkgdesc='Linux ChimeraOS'
+pkgdesc='Linux Atomix Linux'
 _srctag=v${pkgver%.*}-${pkgver##*.}
 url="https://github.com/ChimeraOS/linux/commits/$_srctag"
 arch=(x86_64)
@@ -27,11 +27,11 @@ makedepends=(
   #texlive-latexextra
 )
 options=('!strip')
-_srcname=linux-chimeraos
+_srcname=linux-atomix
 source=(
-  "linux-chimeraos.tar.gz::https://github.com/ChimeraOS/linux/archive/refs/tags/$_srctag.tar.gz"
+  "linux-atomix.tar.gz::https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.15.8.tar.xzz"
   config  # the main kernel config file
-  config-chimera # our config that will be merged
+  config-atomix # our config that will be merged
   experiments.patch # experimental kernel patches
 )
 
@@ -42,9 +42,9 @@ validpgpkeys=(
   C7E7849466FE2358343588377258734B41C31549  # David Runge <dvzrv@archlinux.org>
 )
 b2sums=(
-  '54255d40dd141275abdc23b598a4435a7208d3cf7de345f56f15429e634b1772131a47af0b7a543c2a1f1567c783128d833289d09d080500b4ed3bc9e6163351' # linux-chimeraos.tar.gz
+  'SKIP' # linux-atomix.tar.gz
   '4a02b3918df70e55fcc9dde84d0f8464311286aebf6ecbfc6c654206fa245064cfdc03b2fe5c16c3704722a8caf7afabaa7cbf6b0d40455808a5e01839b21d76' # config
-  '95508981a09c0af2975654a63502fb3bef9d7984666dc439db6edd9767286c2e60287a6246da1afa91adacf0f9f8ab7a956a818c4252600169ae49768638a0d4' # config-chimeraos
+  'SKIP' # config-atomix
   'SKIP' # experiments.patch
 )
 
@@ -80,7 +80,7 @@ prepare() {
   echo "Setting config..."
   cp ../config .config
   _make olddefconfig
-  scripts/kconfig/merge_config.sh -m .config ../config-chimera
+  scripts/kconfig/merge_config.sh -m .config ../config-atomix
   diff -u ../config .config || :
 
   echo "Prepared $pkgbase version $(<version)"
