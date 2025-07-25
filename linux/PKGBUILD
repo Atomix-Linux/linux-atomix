@@ -5,8 +5,8 @@ pkgbase=linux-atomix
 pkgver=6.15.8.atom1
 pkgrel=1
 pkgdesc='Linux Atomix Linux'
-_srctag=v${pkgver%.*}-${pkgver##*.}
-url="https://github.com/ChimeraOS/linux/commits/$_srctag"
+_kernver=6.15.8
+url="https://github.com/Atomix-Linux/linux-atomix"
 arch=(x86_64)
 license=(GPL2)
 makedepends=(
@@ -58,7 +58,7 @@ _make() {
 }
 
 prepare() {
-  mv "linux-${pkgver%%.*}.*" "$_srcname"
+  mv "linux-6.15.8" "$_srcname"
   cd $_srcname
 
   echo "Setting version..."
